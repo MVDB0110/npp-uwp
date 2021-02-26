@@ -14,6 +14,7 @@ variables:
   buildPlatform: 'x64'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
+  certificatePassword: '3itm2kau'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -34,7 +35,7 @@ steps:
     platform: 'x64'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="B55E31BECDE3A22E3D428F70EC8A43A5BBD74A77" /p:PackageCertificateKeyFile="$(getCert.secureFilePath)"'
+    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Never /p:UapAppxPackageBuildMode=SideloadOnly /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="B55E31BECDE3A22E3D428F70EC8A43A5BBD74A77" /p:PackageCertificateKeyFile="$(getCert.secureFilePath)" /p:PackageCertificatePassword="$(certificatePassword)"'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
